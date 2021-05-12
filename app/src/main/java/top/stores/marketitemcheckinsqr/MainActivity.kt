@@ -10,27 +10,29 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.mugan86.qrscanner.utils.DateTime
+import top.stores.marketitemcheckinsqr.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private val ZXING_CAMERA_PERMISSION = 1
     private var mClss: Class<*>? = null
-    private lateinit var openScanner : Button
-    private lateinit var bar_code_id_txt : TextView
-    private lateinit var scan_data_txt : TextView
-
+    private lateinit var binding: ActivityMainBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        openScanner = findViewById(R.id.openScanner)
-        bar_code_id_txt = findViewById(R.id.bar_code_id_txt)
-        scan_data_txt = findViewById(R.id.scan_data_txt)
-        openScanner.setOnClickListener {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        binding.openScanner.setOnClickListener {
             launchActivity(ScannerViewActivity::class.java)
         }
+        binding.btnCheckOut.setOnClickListener {
+            moveToFragment(ItemListFragment.newInstance())
+        }
+
     }
 
 
@@ -41,11 +43,17 @@ class MainActivity : AppCompatActivity() {
         if (barcode == "") {
             Toast.makeText(this@MainActivity,Constants.BAR_CODE_NOT_FOUND, Toast.LENGTH_LONG).show()
         } else {
-            bar_code_id_txt?.text = barcode
-            scan_data_txt.text = DateTime.currentDataTime
+            binding.barCodeIdTxt?.text = barcode
+            binding.scanDataTxt.text = DateTime.currentDataTime
         }
        }
 
+
+    private fun moveToFragment(fragment : Fragment){
+        val fragmentTrans = supportFragmentManager.beginTransaction()
+        fragmentTrans.replace(R.id.fragment_container, fragment)
+        fragmentTrans.commit()
+    }
 
 
     private fun launchActivity(clss: Class<*>) {

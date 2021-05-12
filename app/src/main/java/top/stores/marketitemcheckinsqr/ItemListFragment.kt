@@ -34,6 +34,8 @@ class ItemListFragment : Fragment() {
     }
 
     companion object {
+        fun newInstance(): ItemListFragment = ItemListFragment()
+        const val ACTIVITY_NOT_FOUND = "Activity Not Found"
 
     }
 

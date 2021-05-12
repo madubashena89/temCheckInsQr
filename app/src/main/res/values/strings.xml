@@ -3,6 +3,7 @@
     <string name="bar_code_id">Bar code id</string>
     <string name="scan_data_text" />
     <string name="take_scan_qr_code">Take QR Code</string>
+    <string name="check_out">Check Out</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
