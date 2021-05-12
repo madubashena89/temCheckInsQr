@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             launchActivity(ScannerViewActivity::class.java)
         }
         binding.btnCheckOut.setOnClickListener {
-            moveToFragment(ItemListFragment.newInstance())
+            startActivity(Intent(this, ItemListActivity::class.java))
         }
 
     }
@@ -49,11 +49,6 @@ class MainActivity : AppCompatActivity() {
        }
 
 
-    private fun moveToFragment(fragment : Fragment){
-        val fragmentTrans = supportFragmentManager.beginTransaction()
-        fragmentTrans.replace(R.id.fragment_container, fragment)
-        fragmentTrans.commit()
-    }
 
 
     private fun launchActivity(clss: Class<*>) {

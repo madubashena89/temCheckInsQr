@@ -1,40 +1,31 @@
 package top.stores.marketitemcheckinsqr
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import top.stores.marketitemcheckinsqr.adapter.HomeAdapter
-import top.stores.marketitemcheckinsqr.databinding.FragmentItemListBinding
+import top.stores.marketitemcheckinsqr.databinding.ActivityItemListBinding
 
-class ItemListFragment : Fragment() {
+class ItemListActivity : AppCompatActivity() {
 
     private lateinit var homeInvesterAdapter: HomeAdapter
     private lateinit var itemRecyclerView: RecyclerView
-    private lateinit var binding: FragmentItemListBinding
+    private lateinit var binding: ActivityItemListBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentItemListBinding.inflate(inflater, container, false)
-
+      //  binding = FragmentItemListBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_item_list)
         itemRecyclerView = binding.listRecyclerView
 
-        return inflater.inflate(R.layout.fragment_item_list, container, false)
+
     }
 
     companion object {
-        fun newInstance(): ItemListFragment = ItemListFragment()
+        fun newInstance(): ItemListActivity = ItemListActivity()
         const val ACTIVITY_NOT_FOUND = "Activity Not Found"
 
     }
@@ -42,11 +33,11 @@ class ItemListFragment : Fragment() {
 
     fun setUpAdapterWithList(recyclerView: RecyclerView, arrayList: ArrayList<itemData>){
 //        Thread.sleep(1000)
-        homeInvesterAdapter = HomeAdapter(activity)
+        homeInvesterAdapter = HomeAdapter(this)
         if (arrayList != null) {
             homeInvesterAdapter.setProjectList(arrayList)
         }
-        val layoutManager = LinearLayoutManager(activity)
+        val layoutManager = LinearLayoutManager(this)
         layoutManager.stackFromEnd = true
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = homeInvesterAdapter
