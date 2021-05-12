@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import top.stores.marketitemcheckinsqr.adapter.HomeAdapter
 import top.stores.marketitemcheckinsqr.databinding.ActivityItemListBinding
 
-class ItemListActivity : AppCompatActivity() {
+
+class ItemListActivity (): AppCompatActivity() {
 
     private lateinit var homeInvesterAdapter: HomeAdapter
     private lateinit var itemRecyclerView: RecyclerView
@@ -22,6 +23,12 @@ class ItemListActivity : AppCompatActivity() {
         itemRecyclerView = binding.listRecyclerView
 
 
+        val intent = intent
+        val args = intent.getBundleExtra("BUNDLE")
+        val itemlist =
+            args!!.getSerializable("ARRAYLIST") as ArrayList<ItemData>?
+        setUpAdapterWithList(itemRecyclerView,itemlist)
+
     }
 
     companion object {
@@ -31,7 +38,7 @@ class ItemListActivity : AppCompatActivity() {
     }
 
 
-    fun setUpAdapterWithList(recyclerView: RecyclerView, arrayList: ArrayList<itemData>){
+    fun setUpAdapterWithList(recyclerView: RecyclerView, arrayList: ArrayList<ItemData>?){
 //        Thread.sleep(1000)
         homeInvesterAdapter = HomeAdapter(this)
         if (arrayList != null) {

@@ -3,15 +3,12 @@ package top.stores.marketitemcheckinsqr
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import com.mugan86.qrscanner.utils.DateTime
 import top.stores.marketitemcheckinsqr.databinding.ActivityMainBinding
 
@@ -20,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private val ZXING_CAMERA_PERMISSION = 1
     private var mClss: Class<*>? = null
     private lateinit var binding: ActivityMainBinding
+    private var itemList = ArrayList<ItemData>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +28,11 @@ class MainActivity : AppCompatActivity() {
             launchActivity(ScannerViewActivity::class.java)
         }
         binding.btnCheckOut.setOnClickListener {
-            startActivity(Intent(this, ItemListActivity::class.java))
+            val intent = Intent(this, ItemListActivity::class.java)
+            val args = Bundle()
+            args.putSerializable("ARRAYLIST", itemList)
+            intent.putExtra("BUNDLE", args)
+            startActivity(intent)
         }
 
     }
@@ -45,8 +47,14 @@ class MainActivity : AppCompatActivity() {
         } else {
             binding.barCodeIdTxt?.text = barcode
             binding.scanDataTxt.text = DateTime.currentDataTime
+            itemList.add( ItemData(binding.barCodeIdTxt?.text as String?, binding.scanDataTxt.text))
         }
        }
+
+    private fun setItemList(activity : ItemListActivity){
+        startActivity(Intent(this, activity::class.java))
+        this.itemList
+    }
 
 
 

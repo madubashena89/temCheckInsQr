@@ -1,20 +1,17 @@
 package top.stores.marketitemcheckinsqr.adapter
 
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import top.stores.marketitemcheckinsqr.R
-import top.stores.marketitemcheckinsqr.itemData
+import top.stores.marketitemcheckinsqr.ItemData
 
 class HomeAdapter(private val context: Context?) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
-    private var arrayList: ArrayList<itemData>? = null
+    private var arrayList: ArrayList<ItemData>? = null
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, index: Int): ViewHolder {
         val rootView = LayoutInflater.from(viewGroup.context).inflate(R.layout.activity_card, viewGroup, false)
@@ -36,7 +33,7 @@ class HomeAdapter(private val context: Context?) : RecyclerView.Adapter<HomeAdap
     }
 
 
-    fun setProjectList( arrayList: ArrayList<itemData>) {
+    fun setProjectList(arrayList: ArrayList<ItemData>?) {
 
         this.arrayList = arrayList
     }
