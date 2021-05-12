@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import top.stores.marketitemcheckinsqr.adapter.HomeAdapter
 import top.stores.marketitemcheckinsqr.databinding.ActivityItemListBinding
+import java.io.Serializable
 
 
-class ItemListActivity (): AppCompatActivity() {
+class ItemListActivity (): AppCompatActivity(),Serializable {
 
     private lateinit var homeInvesterAdapter: HomeAdapter
     private lateinit var itemRecyclerView: RecyclerView
